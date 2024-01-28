@@ -1,57 +1,73 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>hotel menu</title>
-        </head>
-        <body>
-            <header>
-                <h1> XYZ HOTEL MENU CARD</h1>
-            </header>
-            <div class="address">
-                <p>Address: No. 12 Hotel Road, ABC Nagar, Chennai - 600017</p>
-                <p>Phone Number: <a href="tel:+917894512365"><img src="assests\img\phone.jpg" width="30px" alt="Phone Icon">+91 78945 12365</a></p>
-              </div>
-              <div class="menu">
-                <div class="menu-heading">South Indian Specials</div>
-                <div class="menu-item">
-                  <img src="assests\img\minitiifin.png" alt="Mini Tiffin">
-                  <p>Mini Tiffin</p>
-                </div>
-                <div class="menu-item">
-                  <img src="assests\img\minimeals.png" alt="Mini Meals">
-                  <p>Mini Meals</p>
-                </div>
-                <div class="menu-item">
-                  <img src="assests\img\dosa.png" alt="Dosa">
-                  <p>Dosa</p>
-                </div>
-                <div class="menu-heading" style="padding-top: 50px;">South Indian Meals</div>
-                <div class="menu-item">
-                  <img src="assests\img\sambarrice.png" alt="Sambhar Rice">
-                  <p>Sambhar Rice</p>
-                </div>
-                <div class="menu-item">
-                  <img src="assests\img\tomato.png" alt="Tomato Rice">
-                  <p>Tomato Rice</p>
-                </div>
-                <div class="menu-item">
-                  <img src="assests\img\vegbiryani.png" alt="Veg Biriyani">
-                  <p>Veg Biriyani</p>
-                </div>
-              </div>  
-              <div class="cta-buttons">
-                <a href="tel:+917894512365" class="cta-button">
-                  <img src="assests\img\phone.jpg" alt="Phone Icon"> Call to book order
-                </a>
-                <a href="https://wa.me/917894512365" class="cta-button">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE6WkvijuAxGSTyJzBFuTJpFisZ5WMV32yJQ&usqp=CAU" alt="Whatsapp Icon"> Whatsapp to book order
-                </a>
-              </div>
-            </body>
-            </html>   
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <title>ToDo List</title>
+  <style>.strikethrough:checked + label { text-decoration:line-through;}</style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">To-Do List</h2>
+    <ul class="list-group" id="doList">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="form-check">
+          <input class="form-check-input strikethrough" type="checkbox" id="task1">
+          <label class="form-check-label" for="task1">Checkbox Task</label>
+        </div>
+        <button class="btn btn-danger btn-sm delete-btn">Remove</button>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="form-check">
+          <input class="form-check-input strikethrough" type="checkbox" id="task2">
+          <label class="form-check-label" for="task2">Project work</label>
+        </div>
+        <button class="btn btn-danger btn-sm delete-btn">Remove</button>
+      </li>
+    </ul>
+    <div class="input-group mt-3">
+      <input type="text" class="form-control" placeholder="Type in your New Task" id="newTaskInput">
+      <button class="btn btn-primary" id="addTaskBtn">Add Task</button>
+    </div>
+<h2 class="text-center my-4">Completed-List</h2>
+<ul class="list-group" id="removedlist"></ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('addTaskBtn').addEventListener('click', function() {
+      var taskInput = document.getElementById('newTaskInput').value;
+      if (taskInput.trim() !== '') {
+        var doList = document.getElementById('doList');
+        var newTask = document.createElement('li');
+        newTask.className = 'list-group-item d-flex justify-content-between align-items-center';
+        var curdate=new Date().toLocaleDateString();
+        newTask.innerHTML = `
+          <div class="form-check">
+            <input class="form-check-input strikethrough" type="checkbox">
+            <label class="form-check-label">${taskInput} - ${curdate}</label>
+          </div>
+          <button class="btn btn-danger btn-sm delete-btn">Remove</button>
+        `;
+         doList.appendChild(newTask);
+        document.getElementById('newTaskInput').value = '';
+      }
+    });
+
+    document.addEventListener('click',function(e) {
+      if(e.target.classList.contains('delete-btn')) {
+        var taskitem=e.target.parentElement;
+        if(taskitem.parentElement.id==='doList'){
+          removedlist.appendChild(taskitem);
+        }else if(taskitem.parentElement.id==='removedlist'){
+          taskitem.remove();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
 
 
 
